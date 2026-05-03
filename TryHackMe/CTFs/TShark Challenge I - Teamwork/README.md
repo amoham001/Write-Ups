@@ -155,7 +155,7 @@ Congratulations! You have finished the first challenge room, but there is one mo
 
 After completing this challenge I have gained valuable experience using tshark and realized the efficiency of the command line for packet analysis. Congratulations to all those who completed this challenge, I hope you found my walkthrough helpful!
 
-You can find more of my walkthroughs <a href=https://github.com/amoham001/Write-Ups/tree/main>here</a>
+You can find more of my walkthroughs <a href=https://github.com/amoham001/Write-Ups/tree/main/TryHackMe>here</a>
 
 
 
