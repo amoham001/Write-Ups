@@ -27,7 +27,7 @@ Investigate captured traffic data and analyze suspicious domain activity to crea
 
 **Read the task above and start the attached VM.**
 
-- **Answer**: No answer needed
+> **Answer**: No answer needed
 ---
 
 ## Task 2: Case: Teamwork!
@@ -70,9 +70,9 @@ The supsicously looking domain can be seen above due to its unusual characters.
 
 Now, we can defang the URL using <a href=https://cyberchef.org/>CyberChef</a>
 
-#### Answer:
 
-> **hxxp[://]www[.]paypal[.]com4uswebappsresetaccountrecovery[.]timeseaways[.]com/**
+
+> **Answer**: hxxp[://]www[.]paypal[.]com4uswebappsresetaccountrecovery[.]timeseaways[.]com/
 
 <h3>When was the URL of the malicious/suspicious domain address first submitted to VirusTotal?</h3>
 
@@ -88,15 +88,15 @@ I pasted the URL above into VirusTotal and got this result.
 
 As can be seen in the History section within the Details tab, the URL was first submitted to VirusTotal on April 17th, 2017 @ 22:52:53 UTC
 
-#### Answer: 
-> **2017-04-17 22:52:53 UTC**
+ 
+> **Answer:** 2017-04-17 22:52:53 UTC
 
 <h3>Which known service was the domain trying to impersonate?</h3>
 
 This is pretty straightforward as Paypal is what the URL begins with.
 
-#### Answer:
-> Paypal
+
+> **Answer:** Paypal
 
 <h3>What is the IP address of the malicious domain? Enter your answer in defanged format.</h3>
 
@@ -118,8 +118,8 @@ Using VirusTotal again, I scanned the URl, only this time without the "http://",
 </div>
 
 After defanging with CyberChef, this is the answer
-#### Answer:
-> 184[.]154[.]127[.]226
+
+> **Answer:** 184[.]154[.]127[.]226
 
 <h3>What is the email address that was used? Enter your answer in defanged format. (format: aaa[at]bbb[.]ccc)</h3>
 
@@ -141,14 +141,14 @@ After executing this command, the output shows the compromised account credentia
 
 </div>
 
-#### Answer:
-> johnny5alive[at]gmail[.]com
+
+> **Answer:** johnny5alive[at]gmail[.]com
 
 Congratulations! You have finished the first challenge room, but there is one more ticket before calling it out a day!
 
     TShark Challenge II: Directory
 
-> No answer needed
+> **Answer:** No answer needed
 
 ---
 <h3>End Note</h3>
