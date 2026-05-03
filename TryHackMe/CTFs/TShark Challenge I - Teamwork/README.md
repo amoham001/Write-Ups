@@ -135,7 +135,7 @@ After executing this command, the output shows the compromised account credentia
 
 <div align="center">
 
-**Figure 4:**: Used Email Address
+**Figure 5:** Used Email Address
 
 ![Used Email Address](https://github.com/amoham001/Write-Ups/blob/5288f90237bca243e4fd28b1750423fcdfdb362c/TryHackMe/CTFs/TShark%20Challenge%20I%20-%20Teamwork/Screen%20Captures/Email_Location_Output.png)
 
