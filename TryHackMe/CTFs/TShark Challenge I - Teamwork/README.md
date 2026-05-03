@@ -104,7 +104,7 @@ Using VirusTotal again, I scanned the URl, only this time without the "http://",
 
 <div align="center">
 
-** Figure 3:** VirusTotal Query No "http://"
+**Figure 3:** VirusTotal Query No "http://"
 
 ![VirusTotal No HTTP](https://github.com/amoham001/Write-Ups/blob/5288f90237bca243e4fd28b1750423fcdfdb362c/TryHackMe/CTFs/TShark%20Challenge%20I%20-%20Teamwork/Screen%20Captures/VTotal-Nohttp.png)
 </div>
