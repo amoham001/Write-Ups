@@ -49,11 +49,115 @@ According to VirusTotal, there is a domain marked as malicious/suspicious.
 
 I first started my investigation by reading the "teamwork.pcap" file to get a baseline of the URLs displayed, then pulled the DNS queries from it using the appropriate tshark search filters, piping it to the "nl" command, which numbers the lines of a file.
 
-#### Command Executed
+### Command Executed
 ```bash
-tshark -r teamwork.pcap -Y "dns.qry.type == 1 " -T | nl
+tshark -r teamwork.pcap -Y "dns.qry.type == 1 " | nl
 ```
+
+After scanning through the packets and filtering DNS queries for all A queries, I stumbled upon a suscpiciously looking domain:
 
 ### Command Output
 
-![DNS Queries](<img width="2852" height="854" alt="DNS-Qry-Output" src="https://github.com/user-attachments/assets/15e2078b-9a27-4ac6-96c9-b0ca82a283fb" />)
+<div align="center">
+  
+**Figure 1:** Output of TShark command showing extracted domains
+
+![DNS Queries](https://github.com/amoham001/Write-Ups/blob/5288f90237bca243e4fd28b1750423fcdfdb362c/TryHackMe/CTFs/TShark%20Challenge%20I%20-%20Teamwork/Screen%20Captures/DNS-Qry-Output.png)
+
+</div>
+
+The supsicously looking domain can be seen above due to its unusual characters.
+
+Now, we can defang the URL using <a href=https://cyberchef.org/>CyberChef</a>
+
+#### Answer:
+
+> **hxxp[://]www[.]paypal[.]com4uswebappsresetaccountrecovery[.]timeseaways[.]com/**
+
+<h3>When was the URL of the malicious/suspicious domain address first submitted to VirusTotal?</h3>
+
+I pasted the URL above into VirusTotal and got this result.
+
+<div align="center">
+  
+**Figure 2:** VirusTotal Domain First Submission
+
+![Virus Total First Submission](https://github.com/amoham001/Write-Ups/blob/5288f90237bca243e4fd28b1750423fcdfdb362c/TryHackMe/CTFs/TShark%20Challenge%20I%20-%20Teamwork/Screen%20Captures/VirusTotal_First_Submission.png)
+
+</div>
+
+As can be seen in the History section within the Details tab, the URL was first submitted to VirusTotal on April 17th, 2017 @ 22:52:53 UTC
+
+#### Answer: 
+> **2017-04-17 22:52:53 UTC**
+
+<h3>Which known service was the domain trying to impersonate?</h3>
+
+This is pretty straightforward as Paypal is what the URL begins with.
+
+#### Answer:
+> Paypal
+
+<h3>What is the IP address of the malicious domain? Enter your answer in defanged format.</h3>
+
+Using VirusTotal again, I scanned the URl, only this time without the "http://", and found the malicious domain IP address
+
+<div align="center">
+
+** Figure 3:** VirusTotal Query No "http://"
+
+![VirusTotal No HTTP](https://github.com/amoham001/Write-Ups/blob/5288f90237bca243e4fd28b1750423fcdfdb362c/TryHackMe/CTFs/TShark%20Challenge%20I%20-%20Teamwork/Screen%20Captures/VTotal-Nohttp.png)
+</div>
+
+<div align="center">
+
+**Figure 4:** Malicious Domain IP Address
+
+![Malicious Domain IP Address](https://github.com/amoham001/Write-Ups/blob/5288f90237bca243e4fd28b1750423fcdfdb362c/TryHackMe/CTFs/TShark%20Challenge%20I%20-%20Teamwork/Screen%20Captures/VTotal_IP.png)
+
+</div>
+
+After defanging with CyberChef, this is the answer
+#### Answer:
+> 184[.]154[.]127[.]226
+
+<h3>What is the email address that was used? Enter your answer in defanged format. (format: aaa[at]bbb[.]ccc)</h3>
+
+Given that the victim's credentials were most likely uploaded to this fake site, I used the following tshark command to filter for HTTP POST requests, using the -V flag to return all packet information
+
+### Command Executed
+```bash
+tshark -r teamwork.pcap -Y 'http.request.method == POST' -V
+```
+
+### Command Output
+After executing this command, the output shows the compromised account credentials, which includes our wanted email address.
+
+<div align="center">
+
+**Figure 4:**: Used Email Address
+
+![Used Email Address](https://github.com/amoham001/Write-Ups/blob/5288f90237bca243e4fd28b1750423fcdfdb362c/TryHackMe/CTFs/TShark%20Challenge%20I%20-%20Teamwork/Screen%20Captures/Email_Location_Output.png)
+
+</div>
+
+#### Answer:
+> johnny5alive[at]gmail[.]com
+
+Congratulations! You have finished the first challenge room, but there is one more ticket before calling it out a day!
+
+    TShark Challenge II: Directory
+
+> No answer needed
+
+---
+<h3>End Note</h3>
+
+After completing this challenge I have gained valuable experience using tshark and realized the efficiency of the command line for packet analysis. Congratulations to all those who completed this challenge, I hope you found my walkthrough helpful!
+
+You can find more of my walkthroughs <a href=https://github.com/amoham001/Write-Ups/tree/main>here</a>
+
+
+
+
+
