@@ -175,7 +175,7 @@ THM{W3b_Sh3ll_Usag3}
 
 <h2>Questions</h2>
 
-The answer to the below questions can be found through the task readings, however let's elaborate on each answer for learning sake
+The answer to the below questions can be found through the task readings, however we will elaborate on each answer for learning sake
 
 <h3>What is the part of the URL that associates values to parameters and can be a valuable indicator of web shell activity?</h3>
 
@@ -187,4 +187,76 @@ Query strings are the part of the URL that come after the question mark '?' symb
 
 > **Answer:** creat
 
-"creat"
+The "creat" system call is used to create new files of re-write existing ones. In this context, the correlation between a suspcious POST request and creation lies in the logs. The web logs show the attack itself occurred, while the audit logs show the result. 
+
+Below are two examples with sample text that demonstrate this:
+
+**Web Logs:**
+```bash
+POST /upload.php? HTTP/1.1
+203.0.113.66 - - [04/May/2026 16:37:45] "POST /upload.php" 200
+```
+**Admin Logs:**
+```bash
+type=SYSCALL msg=audit(1715074425.123): pid=1234 syscall=creat name="/var/www/html/uploads/shell.php" success=yes
+```
+---
+## Task 5: Beyond Logs
+
+<h2>Questions</h2>
+
+<h3>What command would you use to locate .php files in the /var/www/ directory?</h3>
+
+> **Answer:** find /var/www/ -type f -name "*.php"
+
+Let's break this down:
+
+| Component      | Purpose     |
+| ------------- | ------------- |
+| ```find``` | Command that searches for files based on certain criteria |
+| ```/var/www/``` | Starting directory |
+| ```type -f``` | Only searches for regular files|
+| ```name "*.php"``` | Matches filenames ending in ```.php``` |
+
+<h3>Which Wireshark filter would you use to search specifically for PUT requests?</h3>
+
+> **Answer:** http.request.method == "PUT"
+
+The http.request.method is a wireshark search filter that filters packets based on the corresponding request method
+The HTTP PUT method is used to upload or replace a file or resource on a web server.
+
+Below is a table of all HTTP request methods, and their use cases depending on the context:
+
+| Request Method | 	Normal Usage | Possible abuse |
+| -------------- | ------------- | -------------- |
+| GET |	Retrieve a resource | Used for recon or interacting with a web shell |
+| POST |	Submit data to the server | Upload or interact with a web shell |
+| PUT 	| Upload or replace a file on the server | 	Upload a web shell |
+| DELETE |	Remove a resource from the server |	Cleanup methods |
+| OPTIONS |	Requests methods that are supported |	Reconaissance |
+| HEAD |	Similar to GET but only returns headers |	To detect files |
+
+---
+
+## Task 6: Investigation
+
+<h2>Questions</h2>
+
+<h3>Which IP address likely belongs to the attacker?</h3>
+
+I began the investigation by reviewing the logs and establishing a baseline. I noticed there were 200 response codes, indicating that a HTTP request successfully went through, from devices on the internal network. 
+
+<h3>What is the first directory that the attacker successfully identifies?</h3>
+
+<h3>What is the name of the .php file the attacker uses to upload the web shell?</h3>
+
+<h3>What is the first command run by the attacker using the newly uploaded web shell?</h3>
+
+<h3>After gaining access via the web shell, the attacker uses a command to download a second file onto the server. What is the name of this file?</h3>
+
+
+<h3>The attacker has hidden a secret within the web shell. Use cat to investigate the web shell code and find the flag.</h3>
+
+
+
+
