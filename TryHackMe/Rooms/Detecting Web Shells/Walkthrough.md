@@ -244,11 +244,64 @@ Below is a table of all HTTP request methods, and their use cases depending on t
 
 <h3>Which IP address likely belongs to the attacker?</h3>
 
-I began the investigation by reviewing the logs and establishing a baseline. I noticed there were 200 response codes, indicating that a HTTP request successfully went through, from devices on the internal network. 
+I began the investigation by reviewing the access log with cat (and grep for additional filtering) and establishing a baseline. I noticed there were 200 response codes, which indicate that a HTTP request successfully went through, from devices on the internal network. After analyzing further, I identified a suspicious user agent and external IP address.
+
+### Command executed
+```bash
+cat /var/log/apache2/access.log | grep "200"
+```
+
+<div align="center">
+
+*First Half of Access Logs*
+
+![Access Logs](https://github.com/amoham001/Write-Ups/blob/afa59cdffe619d15677c36d493eaf98e1492ccc6/TryHackMe/Rooms/Detecting%20Web%20Shells/Screenshots/read_accesslog.png)
+
+</div>
+
+<div align="center">
+
+*Suspicious User Agent & External IP*
+
+![Access Logs - Suspcious IP Found](https://github.com/amoham001/Write-Ups/blob/afa59cdffe619d15677c36d493eaf98e1492ccc6/TryHackMe/Rooms/Detecting%20Web%20Shells/Screenshots/found_shadyIP.png)
+
+</div>
+
+> **Answer:** 203.0.113.66
 
 <h3>What is the first directory that the attacker successfully identifies?</h3>
 
+In my search of the access logs, I use the same command from above to filter for successful HTTP requests, looking at the GET requests and discerning the legitimate requests from the malicious ones. 
+
+```bash
+cat /var/log/apache2/access.log | grep "200"
+```
+
+<div align="center">
+
+*First Directory Found by Attacker*
+
+![Access Logs - First Directory Found by Attacker](https://github.com/amoham001/Write-Ups/blob/afa59cdffe619d15677c36d493eaf98e1492ccc6/TryHackMe/Rooms/Detecting%20Web%20Shells/Screenshots/firstdirfound_attacker.png)
+
+</div>
+
+And it seems the first directory found by the attacker during recon is /wordpress directory
+
+> **Answer:** /wordpress
+
 <h3>What is the name of the .php file the attacker uses to upload the web shell?</h3>
+
+I used the command below to filter for HTTP POST requests to narrow down my search and help me identify which file the attacker used to upload the webshell
+
+### Command Used
+```bash
+cat /var/log/apache2/access.log | grep "POST"
+```
+
+<div align="center">
+ 
+</div>
+
 
 <h3>What is the first command run by the attacker using the newly uploaded web shell?</h3>
 
